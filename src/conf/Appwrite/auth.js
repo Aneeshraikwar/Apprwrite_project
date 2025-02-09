@@ -49,7 +49,8 @@ export class AuthService {
     } catch (err) {
         return err
         
-    }
+    }  
+
   }
 }
 const authojbect = new AuthService();
