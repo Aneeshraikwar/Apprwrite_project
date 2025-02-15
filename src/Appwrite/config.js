@@ -74,7 +74,32 @@ export class Service {
       return error;
     }
   }
+  // file upload services
+  async uploadfile(file) {
+    try {
+      return await this.bucket.createFile( 
+        config.VITE_APWRITE_BUCKET_ID,
+        ID.unique(),
+        file
+      );
+    } catch (error) {
+      return error;
+    }
   
+}
+async deleteFile(fileId) {
+  try {
+    return await this.bucket.deleteFile(
+      config.VITE_APWRITE_BUCKET_ID,
+      fileId
+    );
+  } catch (error) {
+    return error;
+  }
+}
+getFilepreview(fileId) {
+  return this.bucket.getFilePreview(config.VITE_APWRITE_BUCKET_ID,fileId);
+}
 }
 
 const service = new Service();
