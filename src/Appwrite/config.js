@@ -64,6 +64,7 @@ export class Service {
   }
   async getPosts(query = [Query.equal("status", "active")]) {
     try {
+      
       return await this.databases.listDocuments(
         config.VITE_APWRITE_DATABASE_ID,
         config.VITE_APWRITE_COLLECTION_ID,
