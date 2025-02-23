@@ -1,19 +1,38 @@
-import { useState ,useEffect} from 'react'
+import { useState, useEffect } from 'react'
+import React from 'react'
 import './App.css'
+import Header from './components/header/header.jsx'
+import Footer from './components/footer/footer'
 import config from './conf/config'
 import { useDispatch } from 'react-redux'
-import authService from './Appwrite/auth'
-
+import authobject from './Appwrite/auth'
+import { login, logout } from './store/authSlice'
+import { Outlet } from 'react-router-dom'
 
 function App() {
-const [Loading,setLoading]= useState(true)
-const dispatch = useDispatch()
-  return (
-    <>
-     <h1>hello {config.VITE_APWRITE_URL}</h1>
-     <h2>confg id : {config.VITE_APWRITE_BUCKET_ID}</h2>
-    </>
-  )
-} 
+  const [Loading, setLoading] = useState(true)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    async () => {
+       await authobject.getCurrentUser()
+        .than((userData) => {
+          if (userData) {
+            dispatch(login({ userData }))
+          }
+          else {
+            dispatch(logout())
+          }
+        }).finally(() => {
+          setLoading((false))
+        })
+    }
+  } 
+    ,)
+return(
+  
+)
+ 
+}
 
 export default App
