@@ -30,7 +30,23 @@ function App() {
   } 
     ,)
 return(
-  
+  Loading ? (
+    <div className="App min-h-screen bg-gray-100 content-between flex">
+      <div className='w-full block'>
+      <Header/>
+  <main>
+    
+      <h1>TODO</h1> <Outlet/>
+    
+  </main>
+      
+      <Footer/>
+      </div>
+    </div>) : (<div className="App min-h-screen bg-gray-100">
+    <header className="App-header min-h-0">
+      <h1>ApWright</h1>
+      <p>Appwrite + Redux + React</p>
+    </header> </div>)
 )
  
 }
