@@ -3,11 +3,11 @@ import React from 'react'
 import './App.css'
 import Header from './components/header/header.jsx'
 import Footer from './components/footer/footer'
-import config from './conf/config'
+
 import { useDispatch } from 'react-redux'
 import authobject from './Appwrite/auth'
 import { login, logout } from './store/authSlice'
-import { Outlet } from 'react-router-dom'
+
 
 function App() {
   const [Loading, setLoading] = useState(true)
@@ -31,12 +31,12 @@ function App() {
     ,)
 return(
   Loading ? (
-    <div className="App min-h-screen bg-gray-100 content-between flex">
+    <div className="App min-h-screen bg-gray-400 content-between flex flex-wrap">
       <div className='w-full block'>
       <Header/>
   <main>
     
-      <h1>TODO</h1> <Outlet/>
+     Todo: {/* {  <Outlet/>} */}
     
   </main>
       
