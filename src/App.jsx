@@ -12,9 +12,9 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    async () => {
-      await authobject.getCurrentUser()
-        .than((userData) => {
+   const fetchUser= async () => {
+      console.log('async')  
+      await authobject.getCurrentUser().then((userData) => {
           console.log('userdata')
           if (userData) {
             dispatch(login({ userData }))
@@ -23,14 +23,17 @@ function App() {
             dispatch(logout())
             console.log('else')
           }
-        })
+        }).catch((error) => {
+          console.log(error)
+         })
         .finally(() => {
-          setLoading((false))
+          setLoading(false)
           console.log('finally')
         })
-    }
-  })
-  return Loading ? (
+      }
+    fetchUser() // calling the async function
+  },[ dispatch])
+  return !Loading ? (
     <div className="min-h-screen bg-gray-400 content-between flex flex-wrap">
       <div className='w-full block'>
         <Header />
@@ -39,7 +42,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </div>) : null
+    </div>) : null ;
 
 }
 
