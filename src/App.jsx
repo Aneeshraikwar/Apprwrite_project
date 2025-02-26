@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react'
 import React from 'react'
 import './App.css'
-import Header from './components/header/header.jsx'
-import Footer from './components/footer/footer'
-
+import {Header,Footer} from './components/index'
 import { useDispatch } from 'react-redux'
 import authobject from './Appwrite/auth'
 import { login, logout } from './store/authSlice'
@@ -15,40 +13,34 @@ function App() {
 
   useEffect(() => {
     async () => {
-       await authobject.getCurrentUser()
+      await authobject.getCurrentUser()
         .than((userData) => {
+          console.log('userdata')
           if (userData) {
             dispatch(login({ userData }))
           }
           else {
             dispatch(logout())
+            console.log('else')
           }
-        }).finally(() => {
+        })
+        .finally(() => {
           setLoading((false))
+          console.log('finally')
         })
     }
-  } 
-    ,)
-return(
-  Loading ? (
-    <div className="App min-h-screen bg-gray-400 content-between flex flex-wrap">
+  })
+  return Loading ? (
+    <div className="min-h-screen bg-gray-400 content-between flex flex-wrap">
       <div className='w-full block'>
-      <Header/>
-  <main>
-    
-     Todo: {/* {  <Outlet/>} */}
-    
-  </main>
-      
-      <Footer/>
+        <Header />
+        <main>
+          Todo: {/* {  <Outlet/>} */}
+        </main>
+        <Footer />
       </div>
-    </div>) : (<div className="App min-h-screen bg-gray-100">
-    <header className="App-header min-h-0">
-      <h1>ApWright</h1>
-      <p>Appwrite + Redux + React</p>
-    </header> </div>)
-)
- 
+    </div>) : null
+
 }
 
 export default App
